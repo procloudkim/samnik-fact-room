@@ -10,6 +10,8 @@ OpenDART 공시의 숫자와 원문 근거를 함께 확인하도록 만든 금�
 
 2026년 8월 6일에 홈페이지와 공개 데이터 API의 HTTP 200 응답을 확인했습니다. 현재 접근 가능하다는 뜻이며, 상시 가용성이나 지속 운영을 보장하지 않습니다.
 
+[![CI](https://github.com/procloudkim/samnik-fact-room/actions/workflows/ci.yml/badge.svg)](https://github.com/procloudkim/samnik-fact-room/actions/workflows/ci.yml)
+
 ![삼전닉스 팩트룸 워크플로](docs/samnik-fact-room-workflow-wireframe.svg)
 
 ## 3분 안에 보는 핵심
@@ -21,7 +23,7 @@ OpenDART 공시의 숫자와 원문 근거를 함께 확인하도록 만든 금�
 | 내 역할은 무엇인가 | 주제와 범위 설정, 데이터 계약, 백엔드와 프론트엔드 구현, 테스트, 배포 확인까지 혼자 수행했습니다. AI 코딩 도구는 구현 보조로 사용했습니다. |
 | 가장 어려웠던 문제는 무엇인가 | 같은 계정명이 여러 재무제표와 정정본에 있을 때 잘못된 행을 선택해 일부 값이 0으로 보이는 문제였습니다. |
 | 어떻게 해결했나 | 최신 유효 revision을 먼저 선택하고, 지표마다 사용할 재무제표의 우선순위를 분리했습니다. |
-| 어떻게 확인했나 | 실제 PostgreSQL 경로의 회귀 테스트, 합성 fixture, API와 프론트엔드 테스트로 선택 규칙과 공개 상태 계약을 확인했습니다. |
+| 어떻게 확인했나 | 공개 CI에서 합성 fixture 기반 회귀 테스트, API와 프론트엔드 테스트 및 build를 확인했습니다. PostgreSQL 통합 테스트는 별도 DB 환경이 필요하며 현재 공개 릴리스 QA에서는 실행하지 못했습니다. |
 | 아직 무엇이 부족한가 | 범용 GPT에 같은 PDF를 준 경우와의 사용자 비교, 지속 운영, 대규모 트래픽, 성능 우위는 입증하지 않았습니다. |
 
 추천 읽기 순서는 [프로젝트 판단 기록](docs/PROJECT_STORY.md), [아키텍처와 신뢰 경계](docs/ARCHITECTURE.ko.md), [AI 협업 경계](docs/AI_COLLABORATION.md), [면접 설명 가이드](docs/INTERVIEW_GUIDE.md)입니다.
@@ -60,7 +62,7 @@ AI 코딩 도구는 코드 초안과 검토에 사용했습니다. 문제와 범
 ### 결과 확인
 
 - 중복 행과 정정 revision이 있는 입력을 회귀 fixture로 고정
-- 실제 PostgreSQL 조회 경로에서 대표값 선택 결과 확인
+- PostgreSQL 통합 테스트 코드에 대표값 선택과 상태 계약을 고정하되, 현재 공개 릴리스 QA에서는 해당 경로를 실행하지 못했으므로 통과 성과로 사용하지 않음
 - API 응답의 회사, 기간, CFS 또는 OFS, 근거 상태 확인
 - 근거 부족과 시스템 장애가 CONFIRMED로 바뀌지 않는지 확인
 
@@ -96,6 +98,8 @@ v0.1은 여러 자율 Agent가 토론하고 재계획하는 시스템이 아닙�
 
 요구 환경은 Python 3.12와 uv, Node.js 22 이상, Docker Desktop과 Compose입니다. 실제 OpenDART snapshot과 자격 증명은 포함하지 않습니다.
 
+현재 공개 workflow와 최신 실행 상태는 [GitHub Actions CI](https://github.com/procloudkim/samnik-fact-room/actions/workflows/ci.yml)에서 확인할 수 있습니다.
+
 ~~~powershell
 Copy-Item .env.example .env
 docker compose -f infra/docker-compose.yml up -d
@@ -123,6 +127,7 @@ npm run build
 ## 현재 한계
 
 - 공개 데모는 2026년 8월 6일 기준 응답을 확인했지만, 상시 가용성이나 지속 운영을 검증하지 않았습니다.
+- 현재 공개 CI는 PostgreSQL service를 구성하지 않으므로 별도 DB 환경이 필요한 통합 테스트 여섯 건은 건너뜁니다.
 - 실제 OpenDART snapshot은 재배포하지 않습니다.
 - 범용 GPT에 같은 PDF를 제공한 경우와 사용자 이해도를 비교하지 않았습니다.
 - 모델 A/B 테스트, 연속 공시 운영, 대규모 트래픽, 고가용성, 성능 우위를 입증하지 않았어요.

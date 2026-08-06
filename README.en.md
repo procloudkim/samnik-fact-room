@@ -10,6 +10,8 @@ Samnik Fact Room keeps OpenDART figures connected to their filing evidence. It c
 
 The homepage and public data API returned HTTP 200 on August 6, 2026. This confirms point-in-time access, not continuous availability or ongoing operations.
 
+[![CI](https://github.com/procloudkim/samnik-fact-room/actions/workflows/ci.yml/badge.svg)](https://github.com/procloudkim/samnik-fact-room/actions/workflows/ci.yml)
+
 ## Three-minute overview
 
 | Question | Answer |
@@ -19,7 +21,7 @@ The homepage and public data API returned HTTP 200 on August 6, 2026. This confi
 | Personal contribution | I completed the scope, data contract, backend, frontend, tests, and deployment checks as a solo project. AI coding tools assisted implementation. |
 | Hardest issue | Duplicate account labels across statements and revisions caused some valid values to appear as zero. |
 | Final decision | Select the latest valid revision first, then apply metric-specific statement precedence. |
-| Verification | Regression fixtures and the real PostgreSQL query path verify value selection, evidence states, and failure boundaries. |
+| Verification | Public CI checks regression fixtures, API and frontend tests, and the frontend build. PostgreSQL integration tests require a separate database environment and were not run in the current public release QA. |
 | Limits | No user comparison with a general GPT plus the same PDF, continuous operations, large-traffic proof, or performance advantage is claimed. |
 
 Read [project story](docs/PROJECT_STORY.md), [architecture](docs/ARCHITECTURE.ko.md), [AI collaboration](docs/AI_COLLABORATION.md), and [interview guide](docs/INTERVIEW_GUIDE.md) for details.
@@ -51,6 +53,8 @@ This is a fixed, evidence-first orchestration flow, not a group of autonomous ag
 
 Requirements are Python 3.12 with uv, Node.js 22+, and Docker Desktop with Compose. Real OpenDART snapshots and credentials are excluded.
 
+The public workflow and its latest status are available in [GitHub Actions CI](https://github.com/procloudkim/samnik-fact-room/actions/workflows/ci.yml).
+
 ~~~powershell
 Copy-Item .env.example .env
 docker compose -f infra/docker-compose.yml up -d
@@ -78,6 +82,7 @@ Test counts are not the main claim. Regression coverage for revision selection, 
 ## Current limits
 
 - The public demo responded on August 6, 2026, but continuous availability and ongoing operations have not been verified.
+- The public CI does not provision a PostgreSQL service, so six integration tests that require a separate database environment are skipped.
 - Real OpenDART snapshots are not redistributed.
 - No user study against a general GPT with the same PDF has been run.
 - No model A/B test, continuous filing operation, large-traffic proof, high availability, or performance advantage is claimed.

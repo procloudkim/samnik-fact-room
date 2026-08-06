@@ -4,7 +4,11 @@
 
 Samnik Fact Room keeps OpenDART figures connected to their filing evidence. It combines deterministic financial queries, filing-context retrieval, and explicit evidence states for Samsung Electronics and SK hynix.
 
-> This was a solo project built from July 17 to July 22, 2026. The former demo is no longer running. This repository is a portfolio candidate for reviewing the code and engineering decisions.
+> This was a solo project built from July 17 to July 22, 2026. This repository is a portfolio for reviewing the code and engineering decisions.
+
+**Public demo:** [Samnik Fact Room](https://47.245.99.141.sslip.io/)
+
+The homepage and public data API returned HTTP 200 on August 6, 2026. This confirms point-in-time access, not continuous availability or ongoing operations.
 
 ## Three-minute overview
 
@@ -73,7 +77,7 @@ Test counts are not the main claim. Regression coverage for revision selection, 
 
 ## Current limits
 
-- The public demo is not running.
+- The public demo responded on August 6, 2026, but continuous availability and ongoing operations have not been verified.
 - Real OpenDART snapshots are not redistributed.
 - No user study against a general GPT with the same PDF has been run.
 - No model A/B test, continuous filing operation, large-traffic proof, high availability, or performance advantage is claimed.
@@ -81,6 +85,6 @@ Test counts are not the main claim. Regression coverage for revision selection, 
 
 ## Rights
 
-This is a public portfolio candidate. No license is granted by default, and visibility does not automatically permit copying, redistribution, or commercial use. A formal license choice remains open. OpenDART data and dependencies remain subject to their own terms.
+This is a public portfolio. No open-source license is granted, and visibility does not automatically permit copying, redistribution, or commercial use. OpenDART data and dependencies remain subject to their own terms.
 
 Copyright 2026 ProC. All rights reserved.

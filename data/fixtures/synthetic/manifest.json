@@ -1,0 +1,74 @@
+{
+  "schema_version": "1.0",
+  "snapshot_id": "e52578c722fe6db7954f5c537b36f07e4a5970c5efa19448f19dd09ecabc2b6f",
+  "dataset": "opendart-filing",
+  "immutable": true,
+  "provenance": {
+    "source_system": "OpenDART",
+    "acquisition_mode": "SYNTHETIC_FIXTURE",
+    "evidence_status": "SYNTHETIC_UNVERIFIED",
+    "acquired_at": "2026-07-19T00:00:00+09:00",
+    "verified_at": "2026-07-19T00:00:00+09:00",
+    "value_verification_status": "OFFICIAL_DART_HTML_VERIFIED"
+  },
+  "companies": [
+    {
+      "corp_code": "00126380",
+      "corp_name": "삼성전자",
+      "stock_code": "005930"
+    },
+    {
+      "corp_code": "00164779",
+      "corp_name": "SK하이닉스",
+      "stock_code": "000660"
+    }
+  ],
+  "filings": [
+    {
+      "corp_code": "00126380",
+      "rcept_no": "20260310002820",
+      "report_name": "사업보고서 (2025.12)",
+      "business_year": 2025,
+      "reprt_code": "11011",
+      "fs_div": "CFS",
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31",
+      "filing_date": "2026-03-10",
+      "source_url": "https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20260310002820"
+    },
+    {
+      "corp_code": "00164779",
+      "rcept_no": "20260317000635",
+      "report_name": "사업보고서 (2025.12)",
+      "business_year": 2025,
+      "reprt_code": "11011",
+      "fs_div": "CFS",
+      "period_start": "2025-01-01",
+      "period_end": "2025-12-31",
+      "filing_date": "2026-03-17",
+      "source_url": "https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20260317000635"
+    }
+  ],
+  "files": [
+    {
+      "path": "fixture/financial_facts.json",
+      "media_type": "application/json",
+      "sha256": "3d0bbba51bbd618a02a7e8941c2e3591d263a7b3673ebfd3f9919736e60e35c2",
+      "size_bytes": 2193,
+      "origin": "SYNTHETIC_LOCAL"
+    },
+    {
+      "path": "fixture/source_chunks.json",
+      "media_type": "application/json",
+      "sha256": "c72e6f49bd060adeed516c027fb13132c4d934209b5231bf6deda985e5752d97",
+      "size_bytes": 1085,
+      "origin": "SYNTHETIC_LOCAL"
+    }
+  ],
+  "limitations": [
+    "This manifest covers local synthetic payloads, not OpenDART API responses.",
+    "Receipt numbers and URLs identify design targets but are not proof of API acquisition.",
+    "The fixture must never be used to emit a CONFIRMED verdict.",
+    "The DS text is synthetic and must not be presented as a verbatim filing quote."
+  ]
+}

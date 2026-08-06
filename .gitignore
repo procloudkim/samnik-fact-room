@@ -1,0 +1,78 @@
+# Local agent and scratch state
+.agents/
+.codex/
+tmp/
+
+# Secrets and local environment
+.env
+.env.*
+!.env.example
+**/.env
+**/.env.*
+!**/.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+backend/.venv/
+*.egg-info/
+
+# Node
+node_modules/
+frontend/node_modules/
+frontend/dist/
+frontend/coverage/
+
+# Runtime data and private source caches
+*.db
+*.sqlite
+*.sqlite3
+knowledge/
+data/raw/
+data/private/
+
+# Private working notes, generated bundles, and local artifacts
+output/
+submission/
+submissions/
+/local-notes/
+/재무제표 기반 주식투자 체크리스트.txt
+deliverables/private/
+artifacts/private/
+tools/elice_docs/
+docs/*
+!docs/README.md
+!docs/ARCHITECTURE.ko.md
+!docs/samnik-fact-room-workflow-wireframe.svg
+!docs/PROJECT_STORY.md
+!docs/AI_COLLABORATION.md
+!docs/INTERVIEW_GUIDE.md
+
+# Do not publish document bundles, archives, or recorded material
+*.pdf
+*.doc
+*.docx
+*.ppt
+*.pptx
+*.xls
+*.xlsx
+*.zip
+*.7z
+*.rar
+*.mp4
+*.mov
+*.webm
+
+# Logs and local receipts
+*.log
+receipts/
+
+# Editors and OS
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db

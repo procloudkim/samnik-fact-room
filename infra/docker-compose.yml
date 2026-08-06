@@ -1,0 +1,27 @@
+name: samnik-fact-room
+
+services:
+  postgres:
+    image: pgvector/pgvector:0.8.5-pg16-bookworm
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-samnik_fact_room}
+      POSTGRES_USER: ${POSTGRES_USER:-samnik}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-change-me-local-only}
+    ports:
+      - "127.0.0.1:${POSTGRES_PORT:-5432}:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 3s
+      retries: 12
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+      - ./migrations/001_extensions.sql:/docker-entrypoint-initdb.d/010_extensions.sql:ro
+      - ./migrations/002_schema.sql:/docker-entrypoint-initdb.d/020_schema.sql:ro
+      - ./migrations/003_narrative_coverage.sql:/docker-entrypoint-initdb.d/025_narrative_coverage.sql:ro
+      - ./migrations/004_financial_statements.sql:/docker-entrypoint-initdb.d/027_financial_statements.sql:ro
+      - ../data/fixtures/synthetic/seed.sql:/docker-entrypoint-initdb.d/030_synthetic_seed.sql:ro
+
+volumes:
+  postgres-data:

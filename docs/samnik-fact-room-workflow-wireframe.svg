@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1600 1200" role="img" aria-labelledby="title desc">
+  <title id="title">삼전닉스 팩트룸 워크플로와 사용자 화면 와이어프레임</title>
+  <desc id="desc">Supervisor가 질문 범위와 처리 경로를 고정합니다. 누락 정보는 조건 확인 단계에서 보완하고, SQL 또는 공시 검색 결과를 Evidence Gate가 검증한 뒤 Supervisor가 최종 팩트체크 카드로 반환합니다.</desc>
+  <style>
+    :root { color-scheme: light dark; }
+    .canvas { fill: Canvas; }
+    .panel { fill: ButtonFace; fill: color-mix(in srgb, CanvasText 8%, Canvas); stroke: GrayText; stroke-width: 2; }
+    .node { fill: Canvas; stroke: GrayText; stroke-width: 2; }
+    .accent { fill: ButtonFace; fill: color-mix(in srgb, Highlight 14%, Canvas); stroke: Highlight; stroke-width: 2; }
+    .soft { fill: ButtonFace; fill: color-mix(in srgb, GrayText 10%, Canvas); stroke: GrayText; stroke-width: 1.5; }
+    .line { fill: none; stroke: CanvasText; stroke-opacity: .62; stroke-width: 3; }
+    .dash { fill: none; stroke: CanvasText; stroke-opacity: .55; stroke-width: 2.5; stroke-dasharray: 10 8; }
+    .title { fill: CanvasText; font: 700 40px "Malgun Gothic", "Apple SD Gothic Neo", sans-serif; }
+    .h2 { fill: CanvasText; font: 700 26px "Malgun Gothic", "Apple SD Gothic Neo", sans-serif; }
+    .h3 { fill: CanvasText; font: 700 21px "Malgun Gothic", "Apple SD Gothic Neo", sans-serif; }
+    .body { fill: CanvasText; font: 18px "Malgun Gothic", "Apple SD Gothic Neo", sans-serif; }
+    .small { fill: CanvasText; fill-opacity: .72; font: 16px "Malgun Gothic", "Apple SD Gothic Neo", sans-serif; }
+    .badge { fill: Highlight; }
+    .badge-text { fill: HighlightText; font: 700 16px "Malgun Gothic", "Apple SD Gothic Neo", sans-serif; }
+    a .link { fill: LinkText; text-decoration: underline; }
+  </style>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 Z" fill="GrayText"/>
+    </marker>
+  </defs>
+
+  <rect class="canvas" width="1600" height="1200"/>
+  <rect class="badge" x="70" y="48" width="270" height="34" rx="17"/>
+  <text class="badge-text" x="205" y="71" text-anchor="middle">v0.1 현재 구현 , 2026-07-22</text>
+  <text class="title" x="70" y="130">삼전닉스 팩트룸</text>
+  <text class="body" x="70" y="166">종토방 주장을 OpenDART 공시로 검증하고, 동일 기준 수치,원문,한계를 한 장으로 제공</text>
+  <text class="small" x="1530" y="130" text-anchor="end">최종 답변은 Supervisor만 생성</text>
+  <text class="small" x="1530" y="158" text-anchor="end">엘리스 MLAPI , PostgreSQL , pgvector</text>
+
+  <rect class="panel" x="55" y="205" width="1035" height="430" rx="24"/>
+  <text class="h2" x="85" y="250">1 , 고정 라우팅</text>
+  <text class="small" x="85" y="279">A,C,D는 처리 경로 , B는 보완 후 재분류하는 중간 상태</text>
+
+  <rect class="node" x="90" y="360" width="145" height="74" rx="16"/>
+  <text class="h3" x="162" y="392" text-anchor="middle">사용자</text>
+  <text class="small" x="162" y="419" text-anchor="middle">질문,주장</text>
+  <path class="line" d="M235 397 H300" marker-end="url(#arrow)"/>
+
+  <rect class="accent" x="305" y="340" width="190" height="114" rx="18"/>
+  <text class="h3" x="400" y="380" text-anchor="middle">Supervisor</text>
+  <text class="small" x="400" y="409" text-anchor="middle">의도,슬롯,범위</text>
+  <text class="small" x="400" y="434" text-anchor="middle">최종 답변</text>
+  <path class="line" d="M495 397 H550" marker-end="url(#arrow)"/>
+
+  <polygon class="node" points="625,325 700,397 625,469 550,397"/>
+  <text class="h3" x="625" y="389" text-anchor="middle">범위 안?</text>
+  <text class="small" x="625" y="416" text-anchor="middle">공시 사실</text>
+  <path class="line" d="M700 397 H745" marker-end="url(#arrow)"/>
+  <text class="small" x="712" y="382">예</text>
+
+  <polygon class="node" points="820,325 895,397 820,469 745,397"/>
+  <text class="h3" x="820" y="389" text-anchor="middle">정보 충분?</text>
+  <text class="small" x="820" y="416" text-anchor="middle">회사,기간,지표</text>
+  <path class="line" d="M895 397 H930" marker-end="url(#arrow)"/>
+  <text class="small" x="900" y="382">예</text>
+
+  <polygon class="node" points="990,337 1050,397 990,457 930,397"/>
+  <text class="h3" x="990" y="389" text-anchor="middle">SQL만?</text>
+  <text class="small" x="990" y="416" text-anchor="middle">정형/혼합</text>
+
+  <path class="line" d="M990 337 V305 H925" marker-end="url(#arrow)"/>
+  <text class="small" x="1005" y="320">예</text>
+  <rect class="accent" x="810" y="290" width="110" height="58" rx="14"/>
+  <text class="h3" x="865" y="326" text-anchor="middle">A , SQL</text>
+
+  <path class="line" d="M990 457 V500 H925" marker-end="url(#arrow)"/>
+  <text class="small" x="1005" y="485">아니오</text>
+  <rect class="accent" x="735" y="480" width="185" height="58" rx="14"/>
+  <text class="h3" x="827" y="516" text-anchor="middle">C , 본문/혼합</text>
+
+  <path class="line" d="M820 325 V293 H685" marker-end="url(#arrow)"/>
+  <text class="small" x="710" y="310">아니오</text>
+  <rect class="accent" x="490" y="275" width="190" height="74" rx="16"/>
+  <text class="h3" x="585" y="307" text-anchor="middle">B , ② 멀티턴</text>
+  <text class="small" x="585" y="333" text-anchor="middle">중간 상태 , 완성 후 A/C</text>
+
+  <path class="line" d="M625 469 V540 H460" marker-end="url(#arrow)"/>
+  <text class="small" x="638" y="500">아니오</text>
+  <rect class="accent" x="270" y="512" width="185" height="74" rx="16"/>
+  <text class="h3" x="362" y="544" text-anchor="middle">D , 범위 밖</text>
+  <text class="small" x="362" y="570" text-anchor="middle">추천,예측 거절</text>
+
+  <path class="dash" d="M810 319 H730 V570 H495 V454" marker-end="url(#arrow)"/>
+  <path class="dash" d="M765 509 H700 V590 H455 V454" marker-end="url(#arrow)"/>
+  <path class="dash" d="M490 312 H455 V340" marker-end="url(#arrow)"/>
+  <text class="small" x="585" y="615" text-anchor="middle">각 처리 단계 결과는 모두 Supervisor로 복귀</text>
+
+  <rect class="panel" x="1120" y="205" width="425" height="430" rx="24"/>
+  <text class="h2" x="1150" y="250">2 , 단계별 책임</text>
+  <rect class="soft" x="1150" y="285" width="365" height="92" rx="16"/>
+  <text class="h3" x="1175" y="318">Supervisor</text>
+  <text class="body" x="1175" y="347">분류 , 라우팅 , 근거 검증 , 최종 답변</text>
+  <rect class="soft" x="1150" y="395" width="365" height="92" rx="16"/>
+  <text class="h3" x="1175" y="428">① 재무,공시 검색</text>
+  <text class="body" x="1175" y="457">SQL 수치 , pgvector 본문 , 근거 반환</text>
+  <rect class="soft" x="1150" y="505" width="365" height="92" rx="16"/>
+  <text class="h3" x="1175" y="538">② 조건 확인</text>
+  <text class="body" x="1175" y="567">누락 슬롯 , 보완 질문 , 완성 질의 반환</text>
+  <text class="small" x="1150" y="620">①,②는 사용자에게 직접 최종 답변하지 않음</text>
+
+  <rect class="panel" x="55" y="670" width="1490" height="455" rx="24"/>
+  <text class="h2" x="85" y="715">3 , 사용자 화면 와이어프레임</text>
+
+  <rect class="node" x="90" y="750" width="575" height="330" rx="22"/>
+  <text class="h3" x="120" y="790">멀티턴 질의</text>
+  <rect class="soft" x="260" y="815" width="365" height="65" rx="16"/>
+  <text class="body" x="285" y="842">삼전 영업이익이 하닉에</text>
+  <text class="body" x="285" y="867">따였다던데 사실이야?</text>
+  <rect class="accent" x="120" y="900" width="430" height="70" rx="16"/>
+  <text class="body" x="145" y="928">어느 기간으로 비교할까요?</text>
+  <text class="body" x="145" y="955">2025년 연간 연결 기준으로 확인할까요?</text>
+  <rect class="soft" x="315" y="990" width="310" height="52" rx="16"/>
+  <text class="body" x="340" y="1023">응, 2025년 연간으로 봐줘.</text>
+  <text class="small" x="120" y="1067">state: 두 회사 , 영업이익 , 2025년 , 연간 , 연결</text>
+
+  <path class="line" d="M690 915 H770" marker-end="url(#arrow)"/>
+
+  <rect class="node" x="800" y="750" width="700" height="330" rx="22"/>
+  <text class="h3" x="830" y="790">팩트체크 카드</text>
+  <rect class="accent" x="830" y="815" width="640" height="70" rx="16"/>
+  <text class="h3" x="855" y="846">공시 기준 확인됨</text>
+  <text class="body" x="855" y="872">SK하이닉스 영업이익이 약 3.61조원 많습니다.</text>
+  <rect class="soft" x="830" y="905" width="300" height="76" rx="14"/>
+  <text class="small" x="855" y="934">삼성전자</text>
+  <text class="h3" x="855" y="965">43조 6,010억 5,100만 원</text>
+  <rect class="soft" x="1170" y="905" width="300" height="76" rx="14"/>
+  <text class="small" x="1195" y="934">SK하이닉스</text>
+  <text class="h3" x="1195" y="965">47,206,319백만원</text>
+  <text class="body" x="830" y="1018">근거: 삼성전자 20260310002820 , SK하이닉스 20260317000635</text>
+  <text class="small" x="830" y="1053">한계: 사업 구성이 달라 투자 우열을 뜻하지 않습니다.</text>
+
+  <text class="small" x="70" y="1140">판정: 확인됨 , 불일치 , 확인 불가 , 시스템 오류 , 범위 밖</text>
+  <text class="small" x="70" y="1170">현재 구현 , SQL,pgvector,Evidence Gate가 수치와 근거를 소유하며 LLM은 조건부 분류만 보조</text>
+  <a xlink:href="https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20260310002820" target="_blank"><text class="small link" x="1530" y="1142" text-anchor="end">삼성전자 DART 원문</text></a>
+  <a xlink:href="https://dart.fss.or.kr/dsaf001/main.do?rcpNo=20260317000635" target="_blank"><text class="small link" x="1530" y="1168" text-anchor="end">SK하이닉스 DART 원문</text></a>
+</svg>

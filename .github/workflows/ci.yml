@@ -1,0 +1,53 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: Set up uv
+        uses: astral-sh/setup-uv@08807647e7069bb48b6ef5acd8ec9567f424441b # v8.1.0
+
+      - name: Install backend dependencies
+        working-directory: backend
+        run: uv sync --frozen --dev
+
+      - name: Test backend
+        working-directory: backend
+        run: uv run pytest
+
+      - name: Test OpenDART tooling
+        run: uv run --project backend python -m unittest discover -s scripts/opendart/tests -v
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: Test and build frontend
+        working-directory: frontend
+        run: |
+          npm ci
+          npm test
+          npm run typecheck
+          npm run build
+
+      - name: Check public tree
+        shell: pwsh
+        run: ./scripts/release/check_public_tree.ps1 -Mode Tracked

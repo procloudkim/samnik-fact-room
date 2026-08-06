@@ -1,0 +1,124 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://samnik-fact-room.local/schema/source-chunks.schema.json",
+  "title": "Normalized OpenDART narrative chunks with precomputed embeddings",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "source_snapshot_id",
+    "coverage_status",
+    "covered_document_paths",
+    "supported_document_paths",
+    "covered_document_files",
+    "total_supported_document_files",
+    "embedding_model",
+    "embedding_dimensions",
+    "embedding_normalized",
+    "embedding_input_prefix",
+    "chunking",
+    "chunks"
+  ],
+  "properties": {
+    "schema_version": { "const": "1.0" },
+    "source_snapshot_id": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$",
+      "description": "Immutable LIVE_API snapshot from which this enriched snapshot was derived"
+    },
+    "coverage_status": {
+      "enum": ["NOT_BUILT", "PARTIAL_TEXT", "FULL_TEXT"],
+      "description": "Completeness of supported XML/HTML document-file processing"
+    },
+    "covered_document_paths": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "supported_document_paths": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "covered_document_files": { "type": "integer", "minimum": 0 },
+    "total_supported_document_files": { "type": "integer", "minimum": 0 },
+    "embedding_model": { "const": "intfloat/multilingual-e5-small" },
+    "embedding_dimensions": { "const": 384 },
+    "embedding_normalized": { "const": true },
+    "embedding_input_prefix": { "const": "passage: " },
+    "chunking": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["algorithm", "max_chars", "overlap_chars"],
+      "properties": {
+        "algorithm": { "const": "fixed_unicode_chars_v1" },
+        "max_chars": { "type": "integer", "minimum": 32 },
+        "overlap_chars": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "chunks": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 20000,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "chunk_id",
+          "rcept_no",
+          "corp_code",
+          "business_year",
+          "section_path",
+          "chunk_no",
+          "content",
+          "content_sha256",
+          "embedding",
+          "embedding_sha256",
+          "source_url",
+          "evidence_status"
+        ],
+        "properties": {
+          "chunk_id": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$",
+            "description": "SHA-256 over parent snapshot, filing provenance, content digest, model, and embedding digest"
+          },
+          "rcept_no": { "type": "string", "pattern": "^[0-9]{14}$" },
+          "corp_code": { "type": "string", "pattern": "^[0-9]{8}$" },
+          "business_year": { "type": "integer", "minimum": 1999, "maximum": 2100 },
+          "section_path": { "type": "string", "minLength": 1 },
+          "chunk_no": { "type": "integer", "minimum": 0 },
+          "content": { "type": "string", "minLength": 1 },
+          "content_sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+          "embedding": {
+            "type": "array",
+            "minItems": 384,
+            "maxItems": 384,
+            "items": { "type": "number" }
+          },
+          "embedding_sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "source_url": {
+            "type": "string",
+            "pattern": "^https://dart\\.fss\\.or\\.kr/"
+          },
+          "evidence_status": { "const": "OFFICIAL_API_VERIFIED" }
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "coverage_status": { "const": "FULL_TEXT" } } },
+      "then": {
+        "properties": {
+          "covered_document_files": { "minimum": 1 },
+          "total_supported_document_files": { "minimum": 1 }
+        }
+      }
+    }
+  ]
+}

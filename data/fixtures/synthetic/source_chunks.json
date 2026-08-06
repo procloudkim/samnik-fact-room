@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.0",
+  "fixture": true,
+  "evidence_status": "SYNTHETIC_UNVERIFIED",
+  "warning": "Synthetic retrieval text, not a verbatim OpenDART document extract. Never quote it as official text or use it to emit CONFIRMED.",
+  "chunks": [
+    {
+      "corp_code": "00126380",
+      "corp_name": "삼성전자",
+      "rcept_no": "20260310002820",
+      "business_year": 2025,
+      "section_path": "연결재무제표 주석 > 30. 부문별 보고 > DS 부문",
+      "chunk_no": 0,
+      "content": "[합성 테스트 청크 - 원문 인용 아님] 2025년 DS 부문 영업이익 테스트 값은 24,858,075백만원으로 양(+)의 값이다. 이 수치는 삼성전자 전체 또는 메모리 제품만의 실적과 동일하지 않다.",
+      "embedding_model": "synthetic-fixture-384-v1",
+      "value_verification_status": "OFFICIAL_DART_HTML_VERIFIED",
+      "verified_at": "2026-07-19T00:00:00+09:00",
+      "source_url": "https://dart.fss.or.kr/report/viewer.do?rcpNo=20260310002820&dcmNo=11104488&eleId=55&offset=2420698&length=94132&dtd=dart4.xsd"
+    }
+  ]
+}

@@ -6,9 +6,9 @@ Samnik Fact Room keeps OpenDART figures connected to their filing evidence. It c
 
 > This was a solo project built from July 17 to July 22, 2026. This repository is a portfolio for reviewing the code and engineering decisions.
 
-**Public demo:** [Samnik Fact Room](https://47.245.99.141.sslip.io/)
+**Public demo:** ended (unreachable when checked on 2026-10-18)
 
-The homepage and public data API returned HTTP 200 on August 6, 2026. This confirms point-in-time access, not continuous availability or ongoing operations.
+The homepage and public data API returned HTTP 200 on August 6, 2026. To run it yourself, follow [Local run and verification](#local-run-and-verification).
 
 [![CI](https://github.com/procloudkim/samnik-fact-room/actions/workflows/ci.yml/badge.svg)](https://github.com/procloudkim/samnik-fact-room/actions/workflows/ci.yml)
 

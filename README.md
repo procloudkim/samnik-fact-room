@@ -6,9 +6,9 @@ OpenDART 공시의 숫자와 원문 근거를 함께 확인하도록 만든 금�
 
 > 2026년 7월 17일부터 22일까지 진행한 개인 프로젝트입니다. 이 저장소는 코드와 설계 판단을 검토하기 위한 포트폴리오입니다.
 
-**공개 데모:** [삼전닉스 팩트룸](https://47.245.99.141.sslip.io/)
+**공개 데모:** 종료(2026-10-18 접속 불가 확인)
 
-2026년 8월 6일에 홈페이지와 공개 데이터 API의 HTTP 200 응답을 확인했습니다. 현재 접근 가능하다는 뜻이며, 상시 가용성이나 지속 운영을 보장하지 않습니다.
+2026년 8월 6일에는 홈페이지와 공개 데이터 API가 HTTP 200으로 응답했습니다. 지금은 [로컬 실행과 검증](#로컬-실행과-검증)의 절차로 직접 실행할 수 있습니다.
 
 [![CI](https://github.com/procloudkim/samnik-fact-room/actions/workflows/ci.yml/badge.svg)](https://github.com/procloudkim/samnik-fact-room/actions/workflows/ci.yml)
 
